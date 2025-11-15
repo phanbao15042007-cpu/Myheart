@@ -8,7 +8,7 @@
   <style>
     body {
       margin: 0;
-      background: #000;
+      background: #ffc0cb; /* nền hồng */
       color: white;
       font-family: Arial, sans-serif;
       overflow: hidden;
@@ -40,9 +40,22 @@
     }
 
     #success {
-      color: pink;
+      color: red;
       margin-top: 10px;
       display: none;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      background: #ff4d81;
+      color: #fff;
+      cursor: pointer;
     }
 
   </style>
@@ -51,9 +64,9 @@
 <body>
 
 <div id="passwordBox">
-  <h2>Nhập mật khẩu( Gợi ý: ngày sinh anh và em )</h2>
-  <input type="password" id="pw" placeholder="••••" style="padding:10px;font-size:18px;">
-  <button onclick="checkPW()" style="padding:10px 20px;font-size:18px;">OK</button>
+  <h2>Nhập mật khẩu</h2>
+  <input type="password" id="pw" placeholder="••••">
+  <button onclick="checkPW()">OK</button>
   <p id="wrong" style="color:red; display:none;">Sai mật khẩu!</p>
 </div>
 
@@ -61,7 +74,8 @@
 
 <div id="loveText"></div>
 <p id="success">— Anh yêu em —</p>
-  <audio id="bgm" src="perfect.mp3" preload="auto" controls autoplay loop></audio>
+
+<audio id="bgm" src="perfect.mp3" autoplay loop></audio>
 
 <script>
 function checkPW() {
@@ -70,6 +84,8 @@ function checkPW() {
     document.getElementById("passwordBox").style.display = "none";
     startTyping();
     startHeart();
+    document.getElementById("bgm").volume = 0.7;
+    document.getElementById("bgm").play().catch(()=>{});
   } else {
     document.getElementById("wrong").style.display = "block";
   }
@@ -97,7 +113,7 @@ function startTyping() {
       clearInterval(typer);
       document.getElementById("success").style.display = "block";
     }
-  }, 40); // speed: 40ms mỗi ký tự
+  }, 40); // tốc độ 40ms mỗi ký tự
 }
 
 // ---------------------- HIỆU ỨNG TRÁI TIM ----------------------
