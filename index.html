@@ -8,19 +8,22 @@
   <style>
     body {
       margin: 0;
-      background: #ffc0cb; /* nền hồng */
+      background: #ffc0cb;
       color: white;
       font-family: Arial, sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       flex-direction: column;
+      align-items: center;
+      padding-top: 40px;
+      padding-bottom: 80px; /* CHỪA CHỖ CHO FOOTER */
+      min-height: 100vh;
+      position: relative;
     }
 
     #passwordBox {
       text-align: center;
+      z-index: 5;
     }
 
     #loveText {
@@ -28,30 +31,11 @@
       color: red;
       width: 90%;
       max-width: 650px;
-      margin: 20px auto;
+      margin-top: 20px;
       display: none;
       white-space: pre-line;
-    }
-
-    /* --- TIME FOOTER --- */
-    #timeTogether {
-      color: #b30000;
-      font-size: 20px;
-      display: none;
-      font-weight: bold;
-
-      position: fixed;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
       text-align: center;
-      width: 100%;
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
+      z-index: 5;
     }
 
     #success {
@@ -60,8 +44,32 @@
       display: none;
       font-size: 24px;
       font-weight: bold;
+      z-index: 5;
     }
 
+    /* FOOTER THỜI GIAN */
+    #timeTogether {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20px;
+      font-weight: bold;
+      color: #b30000;
+      display: none;
+      z-index: 10; /* ĐÈ LÊN CANVAS */
+      text-align: center;
+      width: 100%;
+    }
+
+    /* Canvas nằm dưới không che chữ */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none; /* Không chặn chữ */
+      z-index: 1;
+    }
   </style>
 </head>
 
@@ -84,7 +92,6 @@
 <audio id="bgm" src="perfect.mp3" autoplay loop></audio>
 
 <script>
-// ----------------------------- CHECK PASSWORD -----------------------------
 function checkPW() {
   const pw = document.getElementById("pw").value;
   if (pw === "1514") {
@@ -100,8 +107,6 @@ function checkPW() {
     document.getElementById("wrong").style.display = "block";
   }
 }
-
-// ----------------------------- HIỆU ỨNG GÕ TỪNG CHỮ -----------------------------
 
 const message = `Hey girl!
 
@@ -130,10 +135,8 @@ function startTyping() {
       document.getElementById("success").style.display = "block";
       document.getElementById("timeTogether").style.display = "block";
     }
-  }, 100); // tốc độ gõ chữ
+  }, 100);
 }
-
-// ----------------------------- THỜI GIAN BÊN NHAU -----------------------------
 
 function startCountTime() {
   const startDate = new Date("2025-07-07T00:00:00");
@@ -141,7 +144,6 @@ function startCountTime() {
   function updateTime() {
     const now = new Date();
     let diff = Math.floor((now - startDate) / 1000);
-
     if (diff < 0) diff = 0;
 
     let days = Math.floor(diff / 86400);
@@ -160,8 +162,6 @@ function startCountTime() {
   updateTime();
   setInterval(updateTime, 1000);
 }
-
-// ----------------------------- HIỆU ỨNG TRÁI TIM BAY -----------------------------
 
 function startHeart() {
   const canvas = document.getElementById("heartCanvas");
@@ -191,11 +191,11 @@ function startHeart() {
     ctx.beginPath();
     ctx.moveTo(this.x, this.y);
     ctx.bezierCurveTo(this.x - this.size, this.y - this.size,
-                      this.x - this.size * 1.5, this.y + this.size / 3,
-                      this.x, this.y + this.size);
+      this.x - this.size * 1.5, this.y + this.size / 3,
+      this.x, this.y + this.size);
     ctx.bezierCurveTo(this.x + this.size * 1.5, this.y + this.size / 3,
-                      this.x + this.size, this.y - this.size,
-                      this.x, this.y);
+      this.x + this.size, this.y - this.size,
+      this.x, this.y);
     ctx.fill();
     ctx.restore();
   };
