@@ -27,7 +27,7 @@
       font-size: 22px;
       color: red;
       width: 90%;
-      max-width: 600px;
+      max-width: 650px;
       margin: 20px auto;
       display: none;
       white-space: pre-line;
@@ -51,6 +51,8 @@
       color: red;
       margin-top: 10px;
       display: none;
+      font-size: 24px;
+      font-weight: bold;
     }
 
   </style>
@@ -75,6 +77,7 @@
 <audio id="bgm" src="perfect.mp3" autoplay loop></audio>
 
 <script>
+// ----------------------------- CHECK PASSWORD -----------------------------
 function checkPW() {
   const pw = document.getElementById("pw").value;
   if (pw === "1514") {
@@ -89,19 +92,19 @@ function checkPW() {
   }
 }
 
-// ---------------------- HIỆU ỨNG GÕ TỪNG CHỮ ----------------------
+// ----------------------------- HIỆU ỨNG GÕ TỪNG CHỮ -----------------------------
 
 const message = `Hey girl!
 
-Today is yours and so is every other day. !...
+Today is yours and so is every other day!
 Give me a password to log into your heart :)
-If anyone asks me what I like, I will answer out loud that I like you!. !
+If anyone asks me what I like, I will answer out loud that I like you!
 I love you for no reason, because you are yourself!
 Having been with me for so long, have you liked me?
 If you don’t mind, be my lover!
-I won’t tell you that I like you.♥
+I won’t tell you that I like you. ♥
 Give me your answer! ♥
-My heart sobs because of you!;
+My heart sobs because of you!`;
 
 let index = 0;
 
@@ -118,10 +121,10 @@ function startTyping() {
       document.getElementById("success").style.display = "block";
       document.getElementById("timeTogether").style.display = "block";
     }
-  }, 100);
+  }, 50);  // tốc độ gõ chữ
 }
 
-// ---------------------- THỜI GIAN BÊN NHAU ----------------------
+// ----------------------------- THỜI GIAN BÊN NHAU -----------------------------
 
 function startCountTime() {
   const startDate = new Date("2025-07-07T00:00:00");
@@ -147,7 +150,7 @@ function startCountTime() {
   setInterval(updateTime, 1000);
 }
 
-// ---------------------- HIỆU ỨNG TRÁI TIM ----------------------
+// ----------------------------- HIỆU ỨNG TRÁI TIM BAY -----------------------------
 
 function startHeart() {
   const canvas = document.getElementById("heartCanvas");
