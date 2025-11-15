@@ -33,12 +33,19 @@
       white-space: pre-line;
     }
 
+    /* --- TIME FOOTER --- */
     #timeTogether {
       color: #b30000;
       font-size: 20px;
-      margin-top: 10px;
       display: none;
       font-weight: bold;
+
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      width: 100%;
     }
 
     canvas {
@@ -85,8 +92,10 @@ function checkPW() {
     startTyping();
     startHeart();
     startCountTime();
-    document.getElementById("bgm").volume = 0.7;
-    document.getElementById("bgm").play().catch(()=>{});
+
+    const bgm = document.getElementById("bgm");
+    bgm.volume = 0.7;
+    bgm.play().catch(() => {});
   } else {
     document.getElementById("wrong").style.display = "block";
   }
@@ -104,7 +113,7 @@ Having been with me for so long, have you liked me?
 If you don’t mind, be my lover!
 I won’t tell you that I like you. ♥
 Give me your answer! ♥
-My heart sobs because of you!`;
+My heart sobs because of you! ♥`;
 
 let index = 0;
 
@@ -121,7 +130,7 @@ function startTyping() {
       document.getElementById("success").style.display = "block";
       document.getElementById("timeTogether").style.display = "block";
     }
-  }, 100);  // tốc độ gõ chữ
+  }, 100); // tốc độ gõ chữ
 }
 
 // ----------------------------- THỜI GIAN BÊN NHAU -----------------------------
@@ -132,6 +141,8 @@ function startCountTime() {
   function updateTime() {
     const now = new Date();
     let diff = Math.floor((now - startDate) / 1000);
+
+    if (diff < 0) diff = 0;
 
     let days = Math.floor(diff / 86400);
     diff %= 86400;
